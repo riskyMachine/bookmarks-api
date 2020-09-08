@@ -23,6 +23,7 @@ Required Body: email
 DELETE: '/tags/delete'   # Deletes existing tags
 Required Body: email, tags(Array of strings)
 
+### Display Routes
 POST: '/tags/add'   # Adds tags to bookmark
 Required Body: email, link, tags(Array of strings)
 
