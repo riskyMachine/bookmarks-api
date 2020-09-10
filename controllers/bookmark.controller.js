@@ -7,8 +7,8 @@ async function createBookmark({ userId, link, title, publisher }) {
 	return bookmark;
 }
 
-async function deleteBookmarkByLink({ link }) {
-	let result = await Bookmark.deleteOne({ link });
+async function deleteBookmark({ userId, link }) {
+	let result = await Bookmark.deleteOne({ userId, link });
 	return result;
 }
 
@@ -25,7 +25,7 @@ async function retrieveBookmark({ userId, link }) {
 
 module.exports = {
 	createBookmark,
-	deleteBookmarkByLink,
+	deleteBookmark,
 	getAllBookmarks,
 	retrieveBookmark,
 };

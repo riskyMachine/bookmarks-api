@@ -3,7 +3,7 @@ const router = new express.Router();
 const { getUser } = require("../controllers/user.controller");
 const {
 	createBookmark,
-	deleteBookmarkByLink,
+	deleteBookmark,
 	getAllBookmarks,
 } = require("../controllers/bookmark.controller");
 
@@ -27,8 +27,9 @@ router.post("/create", async (req, res) => {
 // Delete Bookmark
 router.delete("/delete", async (req, res) => {
 	try {
-		let { link } = req.body;
-		let result = await deleteBookmarkByLink({ link });
+		let { email, link } = req.body;
+		let user = await getUser({ email });
+		let result = await deleteBookmark({ userId: user._id, link });
 		res.status(200).send(result);
 	} catch (e) {
 		res.send(e);

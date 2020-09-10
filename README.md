@@ -8,7 +8,7 @@ POST: '/bookmarks/create'    # Creates bookmark and user
 Required Body: name , email, link, title, publisher
 
 DELETE: '/bookmarks/delete'     # Deletes bookmark
-Required Body: link
+Required Body: link, email
 
 GET: '/bookmarks/get'    # Retrieves all bookmark
 Required Body: email
