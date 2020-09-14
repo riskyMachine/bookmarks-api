@@ -15,11 +15,10 @@ async function deleteBookmark({ userId, link }) {
 
 async function getAllBookmarks({ email }) {
 	let user = await User.findOne({ email });
-	let bookmarks = await Bookmark.find({ userId: user._id });
-	let tags = await getTags({ userId: bookmarks[0].userId });
-	bookmarks = JSON.parse(JSON.stringify(bookmarks));
-	bookmarks[0].tags = tags.tags.map(tag => tag.title);
-	console.log(bookmarks);
+	let bookmarks = await Bookmark.aggregate([
+		{ $match: { userId: user._id } },
+		{ $lookup: { from: 'tags', localField: 'tags', foreignField: 'tags._id', as: 'tags' } }
+	]);
 	return bookmarks;
 }
 
